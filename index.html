@@ -135,7 +135,6 @@ h1.hero-title .sub {
 .hero-art {
   display: flex; align-items: center; justify-content: center;
   height: 100vh; position: relative;
-  background: radial-gradient(ellipse at center, rgba(204,26,26,0.1) 0%, transparent 65%);
 }
 
 /* ── SECTION HEADERS ── */
@@ -162,7 +161,7 @@ h2.sec-title em { color: var(--red); font-style: normal; }
 .ps { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
 @media (max-width: 640px) { .ps { grid-template-columns: 1fr; } }
 .ps-panel { padding: 36px 32px; }
-.ps-panel.bad  { background: rgba(204,26,26,0.06); border-left: 3px solid var(--red); }
+.ps-panel.bad  { background: rgba(38, 204, 26,0.06); border-left: 3px solid var(--red); }
 .ps-panel.good { background: rgba(242,238,234,0.04); border-left: 3px solid var(--white); }
 .ps-head {
   font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
@@ -237,7 +236,7 @@ h2.sec-title em { color: var(--red); font-style: normal; }
 /* ── SKILLS ── */
 .sk-row { display: grid; grid-template-columns: 56px 200px 1fr 100px; gap: 24px; align-items: start; padding: 26px 0; border-top: 1px solid rgba(242,238,234,0.08); }
 .sk-row:last-child { border-bottom: 1px solid rgba(242,238,234,0.08); }
-.sk-row:hover { background: rgba(204,26,26,0.04); }
+.sk-row:hover { background: rgba(38, 204, 26,0.04); }
 .sk-code { font-size: 9px; font-weight: 700; letter-spacing: 0.14em; color: var(--red); text-transform: uppercase; padding-top: 3px; }
 .sk-title { font-family: 'Oswald', sans-serif; font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--white); padding-top: 2px; }
 .sk-desc { font-size: 0.8rem; color: var(--dim); line-height: 1.7; font-family: 'Special Elite', cursive; }
@@ -326,7 +325,7 @@ footer {
 
     <!-- BRAIN GRENADE ILLUSTRATION -->
     <div class="hero-art">
-      <img src="hero.png" alt="Open Brain — red brain held by two hands with WiFi signal" style="width:100%;max-width:380px;display:block;margin:0 auto;filter:drop-shadow(0 0 18px rgba(204,26,26,0.45))"/>
+      <img src="hero.png" alt="Open Brain — red brain held by two hands with WiFi signal" style="width:100%;max-width:380px;display:block;margin:0 auto;filter:drop-shadow(0 0 18px rgba(38, 204, 26,0.45))"/>
       <svg width="0" height="0" style="display:none" viewBox="0 0 380 520" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <filter id="gritty">
@@ -538,23 +537,20 @@ footer {
       </pattern>
       <rect width="1000" height="400" fill="url(#scan)"/>
 
-      <!-- red glow behind center node -->
-      <circle cx="500" cy="165" r="90" fill="rgba(204,26,26,0.08)"/>
-
       <!-- spine -->
       <line x1="80" y1="165" x2="920" y2="165" stroke="rgba(242,238,234,0.15)" stroke-width="2"/>
 
       <!-- arrows -->
-      <polygon points="258,160 272,165 258,170" fill="rgba(204,26,26,0.5)"/>
-      <polygon points="446,160 460,165 446,170" fill="rgba(204,26,26,0.5)"/>
-      <polygon points="638,160 652,165 638,170" fill="rgba(204,26,26,0.5)"/>
-      <polygon points="828,160 842,165 828,170" fill="rgba(204,26,26,0.5)"/>
+      <polygon points="258,160 272,165 258,170" fill="rgba(38, 204, 26,0.5)"/>
+      <polygon points="446,160 460,165 446,170" fill="rgba(38, 204, 26,0.5)"/>
+      <polygon points="638,160 652,165 638,170" fill="rgba(38, 204, 26,0.5)"/>
+      <polygon points="828,160 842,165 828,170" fill="rgba(38, 204, 26,0.5)"/>
 
       <!-- labels above -->
       <text x="170" y="132" text-anchor="middle" font-family="'Special Elite',cursive" font-size="12" fill="rgba(242,238,234,0.35)" font-style="italic">type</text>
-      <text x="358" y="132" text-anchor="middle" font-family="'Special Elite',cursive" font-size="12" fill="rgba(204,26,26,0.5)" font-style="italic">webhook</text>
-      <text x="548" y="132" text-anchor="middle" font-family="'Special Elite',cursive" font-size="12" fill="rgba(204,26,26,0.5)" font-style="italic">embed + store</text>
-      <text x="740" y="132" text-anchor="middle" font-family="'Special Elite',cursive" font-size="12" fill="rgba(204,26,26,0.5)" font-style="italic">expose</text>
+      <text x="358" y="132" text-anchor="middle" font-family="'Special Elite',cursive" font-size="12" fill="rgba(38, 204, 26,0.5)" font-style="italic">webhook</text>
+      <text x="548" y="132" text-anchor="middle" font-family="'Special Elite',cursive" font-size="12" fill="rgba(38, 204, 26,0.5)" font-style="italic">embed + store</text>
+      <text x="740" y="132" text-anchor="middle" font-family="'Special Elite',cursive" font-size="12" fill="rgba(38, 204, 26,0.5)" font-style="italic">expose</text>
 
       <!-- NODES — circles with red border on active -->
       <!-- You -->
@@ -564,7 +560,7 @@ footer {
       <!-- Supabase — bigger, red accent -->
       <circle cx="460" cy="165" r="64" fill="#111" stroke="var(--red)" stroke-width="2.5"/>
       <!-- MCP -->
-      <circle cx="652" cy="165" r="52" fill="#111" stroke="rgba(204,26,26,0.4)" stroke-width="2"/>
+      <circle cx="652" cy="165" r="52" fill="#111" stroke="rgba(38, 204, 26,0.4)" stroke-width="2"/>
       <!-- Claude -->
       <circle cx="844" cy="165" r="44" fill="#111" stroke="rgba(242,238,234,0.1)" stroke-width="2"/>
 
@@ -577,16 +573,16 @@ footer {
       <text x="272" y="177" text-anchor="middle" font-size="38" fill="rgba(242,238,234,0.45)" font-family="sans-serif" font-weight="300">#</text>
 
       <!-- Supabase: DB rings (red) -->
-      <ellipse cx="460" cy="152" rx="26" ry="9" fill="none" stroke="rgba(204,26,26,0.6)" stroke-width="2"/>
-      <line x1="434" y1="152" x2="434" y2="178" stroke="rgba(204,26,26,0.4)" stroke-width="2"/>
-      <line x1="486" y1="152" x2="486" y2="178" stroke="rgba(204,26,26,0.4)" stroke-width="2"/>
-      <ellipse cx="460" cy="178" rx="26" ry="9" fill="none" stroke="rgba(204,26,26,0.5)" stroke-width="2"/>
+      <ellipse cx="460" cy="152" rx="26" ry="9" fill="none" stroke="rgba(38, 204, 26,0.6)" stroke-width="2"/>
+      <line x1="434" y1="152" x2="434" y2="178" stroke="rgba(38, 204, 26,0.4)" stroke-width="2"/>
+      <line x1="486" y1="152" x2="486" y2="178" stroke="rgba(38, 204, 26,0.4)" stroke-width="2"/>
+      <ellipse cx="460" cy="178" rx="26" ry="9" fill="none" stroke="rgba(38, 204, 26,0.5)" stroke-width="2"/>
 
       <!-- MCP: plug -->
-      <rect x="640" y="150" width="24" height="26" rx="4" fill="none" stroke="rgba(204,26,26,0.55)" stroke-width="2"/>
-      <line x1="644" y1="144" x2="644" y2="151" stroke="rgba(204,26,26,0.6)" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="656" y1="144" x2="656" y2="151" stroke="rgba(204,26,26,0.6)" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="652" y1="176" x2="652" y2="184" stroke="rgba(204,26,26,0.5)" stroke-width="2.5" stroke-linecap="round"/>
+      <rect x="640" y="150" width="24" height="26" rx="4" fill="none" stroke="rgba(38, 204, 26,0.55)" stroke-width="2"/>
+      <line x1="644" y1="144" x2="644" y2="151" stroke="rgba(38, 204, 26,0.6)" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="656" y1="144" x2="656" y2="151" stroke="rgba(38, 204, 26,0.6)" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="652" y1="176" x2="652" y2="184" stroke="rgba(38, 204, 26,0.5)" stroke-width="2.5" stroke-linecap="round"/>
 
       <!-- Claude: eye -->
       <circle cx="844" cy="161" r="14" fill="none" stroke="rgba(242,238,234,0.3)" stroke-width="2"/>
@@ -596,14 +592,14 @@ footer {
       <text x="80"  cy="218" y="228" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="13" font-weight="600" letter-spacing="0.1em" fill="rgba(242,238,234,0.7)" text-transform="uppercase">YOU</text>
       <text x="272" y="228" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="13" font-weight="600" letter-spacing="0.1em" fill="rgba(242,238,234,0.7)">SLACK</text>
       <text x="460" y="244" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="13" font-weight="600" letter-spacing="0.1em" fill="var(--red)">SUPABASE</text>
-      <text x="652" y="228" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="13" font-weight="600" letter-spacing="0.1em" fill="rgba(204,26,26,0.8)">MCP SERVER</text>
+      <text x="652" y="228" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="13" font-weight="600" letter-spacing="0.1em" fill="rgba(38, 204, 26,0.8)">MCP SERVER</text>
       <text x="844" y="220" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="13" font-weight="600" letter-spacing="0.1em" fill="rgba(242,238,234,0.6)">CLAUDE</text>
 
       <!-- sub-labels -->
       <text x="80"  y="244" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8.5" fill="rgba(242,238,234,0.25)" letter-spacing="0.06em">capture</text>
       <text x="272" y="244" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8.5" fill="rgba(242,238,234,0.25)" letter-spacing="0.06em">interface</text>
-      <text x="460" y="260" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8.5" fill="rgba(204,26,26,0.5)" letter-spacing="0.06em">postgres + pgvector</text>
-      <text x="652" y="244" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8.5" fill="rgba(204,26,26,0.4)" letter-spacing="0.06em">open protocol</text>
+      <text x="460" y="260" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8.5" fill="rgba(38, 204, 26,0.5)" letter-spacing="0.06em">postgres + pgvector</text>
+      <text x="652" y="244" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8.5" fill="rgba(38, 204, 26,0.4)" letter-spacing="0.06em">open protocol</text>
       <text x="844" y="234" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8.5" fill="rgba(242,238,234,0.22)" letter-spacing="0.06em">any mcp client</text>
 
       <!-- stat strip -->
@@ -778,7 +774,7 @@ footer {
         <div class="sk-desc">Captured specific failures with root cause analysis — traced errors to exact cross-domain issues, built correction mechanisms, documented each mode precisely.</div>
         <div class="sk-stars"><div class="sk-star-row"><div class="sk-star on"></div><div class="sk-star on"></div><div class="sk-star"></div><div class="sk-star"></div><div class="sk-star"></div></div></div>
       </div>
-      <div class="sk-row" style="border-bottom:1px solid rgba(204,26,26,0.2);">
+      <div class="sk-row" style="border-bottom:1px solid rgba(38, 204, 26,0.2);">
         <div class="sk-code" style="color:rgba(242,238,234,0.4);">Meta</div>
         <div class="sk-title" style="color:var(--red);">The System Is Live Right Now</div>
         <div class="sk-desc">This page was built using the Open Brain MCP — search_thoughts and list_thoughts calls powered every piece of content. The portfolio is itself proof the system works.</div>
