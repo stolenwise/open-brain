@@ -15,8 +15,8 @@ html { scroll-behavior: smooth; }
   --white: #f2eeea;
   --red:   #26cc1a;
   --red2:  #129920;
-  --dim:   rgba(242,238,234,0.45);
-  --faint: rgba(242,238,234,0.08);
+  --dim:   rgba(255, 251, 251, 0.819);
+  --faint: rgba(245, 245, 245,0.08);
 }
 
 body {
@@ -116,11 +116,11 @@ h1.hero-title .sub {
 .hero-stats {
   display: flex; gap: 0; margin-top: 48px;
   border-top: 3px solid var(--white);
-  border-bottom: 1px solid rgba(242,238,234,0.15);
+  border-bottom: 1px solid rgba(245, 245, 245,0.85);
 }
 .stat {
   flex: 1; padding: 20px 0;
-  border-right: 1px solid rgba(242,238,234,0.1);
+  border-right: none;
 }
 .stat:last-child { border-right: none; }
 .stat-n {
@@ -162,7 +162,7 @@ h2.sec-title em { color: var(--red); font-style: normal; }
 @media (max-width: 640px) { .ps { grid-template-columns: 1fr; } }
 .ps-panel { padding: 36px 32px; }
 .ps-panel.bad  { background: rgba(38, 204, 26,0.06); border-left: 3px solid var(--red); }
-.ps-panel.good { background: rgba(242,238,234,0.04); border-left: 3px solid var(--white); }
+.ps-panel.good { background: rgba(245, 245, 245,0.04); border-left: 3px solid var(--white); }
 .ps-head {
   font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
   margin-bottom: 24px; display: block;
@@ -179,8 +179,8 @@ h2.sec-title em { color: var(--red); font-style: normal; }
 
 /* ── STEPS ── */
 .steps { }
-.step { display: grid; grid-template-columns: 72px 1fr; padding: 32px 0; border-top: 1px solid rgba(242,238,234,0.1); }
-.step:last-child { border-bottom: 1px solid rgba(242,238,234,0.1); }
+.step { display: grid; grid-template-columns: 72px 1fr; padding: 32px 0; border-top: 1px solid rgba(245, 245, 245,0.8); }
+.step:last-child { border-bottom: 1px solid rgba(245, 245, 245,0.8); }
 .step-n {
   font-family: 'Oswald', sans-serif; font-size: 2.8rem; font-weight: 700;
   color: var(--red); line-height: 1; letter-spacing: 0.02em;
@@ -193,22 +193,22 @@ h2.sec-title em { color: var(--red); font-style: normal; }
 .step p { font-size: 0.82rem; color: var(--dim); line-height: 1.75; max-width: 520px; font-family: 'Special Elite', cursive; }
 .step-code {
   margin-top: 12px; padding: 14px 18px;
-  background: rgba(242,238,234,0.04); border-left: 3px solid var(--red);
+  background: rgba(245, 245, 245,0.04); border-left: 3px solid var(--red);
   font-size: 0.7rem; color: var(--dim); line-height: 1.85; max-width: 460px;
 }
 .step-code .r { color: var(--red); }
 
 /* ── THOUGHTS ── */
-.thought-block { border-top: 1px solid rgba(242,238,234,0.1); padding: 22px 0; display: grid; grid-template-columns: 88px 70px 1fr 140px; gap: 20px; align-items: start; }
-.thought-block:last-child { border-bottom: 1px solid rgba(242,238,234,0.1); }
-.thought-block:hover { background: rgba(242,238,234,0.02); }
+.thought-block { border-top: 1px solid rgba(245, 245, 245,0.8); padding: 22px 0; display: grid; grid-template-columns: 88px 70px 1fr 140px; gap: 20px; align-items: start; }
+.thought-block:last-child { border-bottom: 1px solid rgba(245, 245, 245,0.8); }
+.thought-block:hover { background: rgba(245, 245, 245,0.02); }
 .t-badge { font-size: 8px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 8px; display: inline-block; }
-.t-badge.obs  { background: rgba(242,238,234,0.1); color: var(--white); }
+.t-badge.obs  { background: rgba(245, 245, 245,0.8); color: var(--white); }
 .t-badge.ref  { background: var(--red); color: var(--white); }
 .t-badge.idea { background: transparent; color: var(--red); border: 1px solid var(--red); }
 .t-date { font-size: 9px; color: var(--dim); letter-spacing: 0.1em; padding-top: 4px; }
 .t-body { font-size: 0.82rem; color: var(--dim); line-height: 1.7; font-family: 'Special Elite', cursive; }
-.t-topic { font-size: 8.5px; color: rgba(242,238,234,0.3); letter-spacing: 0.08em; line-height: 1.8; padding-top: 4px; }
+.t-topic { font-size: 8.5px; color: rgba(245, 245, 245,0.3); letter-spacing: 0.08em; line-height: 1.8; padding-top: 4px; }
 @media (max-width: 780px) { .thought-block { grid-template-columns: 1fr; gap: 6px; } }
 
 /* ── COST ── */
@@ -226,23 +226,23 @@ h2.sec-title em { color: var(--red); font-style: normal; }
   filter: none;
 }
 .cost-list { }
-.cl-row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid rgba(242,238,234,0.08); font-size: 0.83rem; }
-.cl-row:first-child { border-top: 1px solid rgba(242,238,234,0.08); }
+.cl-row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid rgba(245, 245, 245,0.08); font-size: 0.83rem; }
+.cl-row:first-child { border-top: 1px solid rgba(245, 245, 245,0.08); }
 .cl-k { color: var(--dim); font-family: 'Special Elite', cursive; }
 .cl-v { font-weight: 700; font-size: 0.78rem; }
 .cl-v.g { color: var(--white); }
 .cl-v.r { color: var(--red); }
 
 /* ── SKILLS ── */
-.sk-row { display: grid; grid-template-columns: 56px 200px 1fr 100px; gap: 24px; align-items: start; padding: 26px 0; border-top: 1px solid rgba(242,238,234,0.08); }
-.sk-row:last-child { border-bottom: 1px solid rgba(242,238,234,0.08); }
+.sk-row { display: grid; grid-template-columns: 56px 200px 1fr 100px; gap: 24px; align-items: start; padding: 26px 0; border-top: 1px solid rgba(245, 245, 245,0.08); }
+.sk-row:last-child { border-bottom: 1px solid rgba(245, 245, 245,0.08); }
 .sk-row:hover { background: rgba(38, 204, 26,0.04); }
 .sk-code { font-size: 9px; font-weight: 700; letter-spacing: 0.14em; color: var(--red); text-transform: uppercase; padding-top: 3px; }
 .sk-title { font-family: 'Oswald', sans-serif; font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--white); padding-top: 2px; }
 .sk-desc { font-size: 0.8rem; color: var(--dim); line-height: 1.7; font-family: 'Special Elite', cursive; }
 .sk-stars { display: flex; gap: 4px; padding-top: 6px; flex-direction: column; align-items: flex-end; }
 .sk-star-row { display: flex; gap: 4px; }
-.sk-star { width: 8px; height: 8px; border-radius: 50%; background: rgba(242,238,234,0.12); }
+.sk-star { width: 8px; height: 8px; border-radius: 50%; background: rgba(245, 245, 245,0.82); }
 .sk-star.on { background: var(--red); }
 @media (max-width: 780px) { .sk-row { grid-template-columns: 1fr; } }
 
@@ -268,7 +268,7 @@ footer {
 .f-name { font-family: 'Oswald', sans-serif; font-size: 1rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
 .f-name span { color: var(--red); }
 .stack { display: flex; gap: 6px; flex-wrap: wrap; }
-.chip { font-size: 8px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 4px 10px; border: 1px solid rgba(242,238,234,0.15); color: var(--dim); }
+.chip { font-size: 8px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 4px 10px; border: 1px solid rgba(245, 245, 245,0.85); color: var(--dim); }
 </style>
 </head>
 <body>
@@ -325,7 +325,7 @@ footer {
 
     <!-- BRAIN GRENADE ILLUSTRATION -->
     <div class="hero-art">
-      <img src="hero.png" alt="Open Brain — red brain held by two hands with WiFi signal" style="width:100%;max-width:380px;display:block;margin:0 auto;filter:drop-shadow(0 0 18px rgba(38, 204, 26,0.45))"/>
+      <img src="hero.png" alt="Open Brain — red brain held by two hands with WiFi signal" style="width:100%;max-width:380px;display:block;margin:0 auto;"/>
       <svg width="0" height="0" style="display:none" viewBox="0 0 380 520" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <filter id="gritty">
@@ -533,12 +533,12 @@ footer {
 
       <!-- background scanlines -->
       <pattern id="scan" width="1" height="4" patternUnits="userSpaceOnUse">
-        <line x1="0" y1="0" x2="1000" y2="0" stroke="rgba(242,238,234,0.03)" stroke-width="1"/>
+        <line x1="0" y1="0" x2="1000" y2="0" stroke="rgba(245, 245, 245,0.03)" stroke-width="1"/>
       </pattern>
       <rect width="1000" height="400" fill="url(#scan)"/>
 
       <!-- spine -->
-      <line x1="80" y1="165" x2="920" y2="165" stroke="rgba(242,238,234,0.15)" stroke-width="2"/>
+      <line x1="80" y1="165" x2="920" y2="165" stroke="rgba(245, 245, 245,0.85)" stroke-width="2"/>
 
       <!-- arrows -->
       <polygon points="258,160 272,165 258,170" fill="rgba(38, 204, 26,0.5)"/>
@@ -547,32 +547,32 @@ footer {
       <polygon points="828,160 842,165 828,170" fill="rgba(38, 204, 26,0.5)"/>
 
       <!-- labels above -->
-      <text x="170" y="132" text-anchor="middle" font-family="'Special Elite',cursive" font-size="12" fill="rgba(242,238,234,0.35)" font-style="italic">type</text>
+      <text x="170" y="132" text-anchor="middle" font-family="'Special Elite',cursive" font-size="12" fill="rgba(245, 245, 245,0.35)" font-style="italic">type</text>
       <text x="358" y="132" text-anchor="middle" font-family="'Special Elite',cursive" font-size="12" fill="rgba(38, 204, 26,0.5)" font-style="italic">webhook</text>
-      <text x="548" y="132" text-anchor="middle" font-family="'Special Elite',cursive" font-size="12" fill="rgba(38, 204, 26,0.5)" font-style="italic">embed + store</text>
+      <text x="548" y="132" text-anchor="middle" font-family="'Special Elite',cursive" font-size="11" fill="rgba(38, 204, 26,0.5)" font-style="italic">embed + store</text>
       <text x="740" y="132" text-anchor="middle" font-family="'Special Elite',cursive" font-size="12" fill="rgba(38, 204, 26,0.5)" font-style="italic">expose</text>
 
       <!-- NODES — circles with red border on active -->
       <!-- You -->
-      <circle cx="80"  cy="165" r="52" fill="#111" stroke="rgba(242,238,234,0.2)" stroke-width="2"/>
+      <circle cx="80"  cy="165" r="52" fill="#111" stroke="rgba(245, 245, 245,0.8)" stroke-width="2"/>
       <!-- Slack -->
-      <circle cx="272" cy="165" r="52" fill="#111" stroke="rgba(242,238,234,0.15)" stroke-width="2"/>
+      <circle cx="272" cy="165" r="52" fill="#111" stroke="rgba(245, 245, 245,0.85)" stroke-width="2"/>
       <!-- Supabase — bigger, red accent -->
-      <circle cx="460" cy="165" r="64" fill="#111" stroke="var(--red)" stroke-width="2.5"/>
+      <circle cx="460" cy="165" r="52" fill="#111" stroke="var(--red)" stroke-width="2.5"/>
       <!-- MCP -->
       <circle cx="652" cy="165" r="52" fill="#111" stroke="rgba(38, 204, 26,0.4)" stroke-width="2"/>
       <!-- Claude -->
-      <circle cx="844" cy="165" r="44" fill="#111" stroke="rgba(242,238,234,0.1)" stroke-width="2"/>
+      <circle cx="844" cy="165" r="44" fill="#111" stroke="rgba(245, 245, 245,0.8)" stroke-width="2"/>
 
       <!-- icons -->
       <!-- You: person -->
-      <circle cx="80" cy="151" r="12" fill="none" stroke="rgba(242,238,234,0.4)" stroke-width="2"/>
-      <path d="M 54 178 Q 54 165 80 165 Q 106 165 106 178" fill="none" stroke="rgba(242,238,234,0.4)" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="80" cy="151" r="12" fill="none" stroke="rgba(245, 245, 245,0.4)" stroke-width="2"/>
+      <path d="M 54 178 Q 54 165 80 165 Q 106 165 106 178" fill="none" stroke="rgba(245, 245, 245,0.4)" stroke-width="2" stroke-linecap="round"/>
 
       <!-- Slack: # -->
-      <text x="272" y="177" text-anchor="middle" font-size="38" fill="rgba(242,238,234,0.45)" font-family="sans-serif" font-weight="300">#</text>
+      <text x="272" y="177" text-anchor="middle" font-size="38" fill="rgba(245, 245, 245,0.45)" font-family="sans-serif" font-weight="300">#</text>
 
-      <!-- Supabase: DB rings (red) -->
+      <!-- Supabase: DB rings (green) -->
       <ellipse cx="460" cy="152" rx="26" ry="9" fill="none" stroke="rgba(38, 204, 26,0.6)" stroke-width="2"/>
       <line x1="434" y1="152" x2="434" y2="178" stroke="rgba(38, 204, 26,0.4)" stroke-width="2"/>
       <line x1="486" y1="152" x2="486" y2="178" stroke="rgba(38, 204, 26,0.4)" stroke-width="2"/>
@@ -585,43 +585,43 @@ footer {
       <line x1="652" y1="176" x2="652" y2="184" stroke="rgba(38, 204, 26,0.5)" stroke-width="2.5" stroke-linecap="round"/>
 
       <!-- Claude: eye -->
-      <circle cx="844" cy="161" r="14" fill="none" stroke="rgba(242,238,234,0.3)" stroke-width="2"/>
-      <circle cx="844" cy="161" r="5"  fill="rgba(242,238,234,0.25)"/>
+      <circle cx="844" cy="161" r="14" fill="none" stroke="rgba(245, 245, 245,0.3)" stroke-width="2"/>
+      <circle cx="844" cy="161" r="5"  fill="rgba(245, 245, 245,0.85)"/>
 
       <!-- labels -->
-      <text x="80"  cy="218" y="228" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="13" font-weight="600" letter-spacing="0.1em" fill="rgba(242,238,234,0.7)" text-transform="uppercase">YOU</text>
-      <text x="272" y="228" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="13" font-weight="600" letter-spacing="0.1em" fill="rgba(242,238,234,0.7)">SLACK</text>
+      <text x="80"  cy="218" y="228" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="13" font-weight="600" letter-spacing="0.1em" fill="rgba(245, 245, 245,0.7)" text-transform="uppercase">YOU</text>
+      <text x="272" y="228" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="13" font-weight="600" letter-spacing="0.1em" fill="rgba(245, 245, 245,0.7)">SLACK</text>
       <text x="460" y="244" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="13" font-weight="600" letter-spacing="0.1em" fill="var(--red)">SUPABASE</text>
       <text x="652" y="228" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="13" font-weight="600" letter-spacing="0.1em" fill="rgba(38, 204, 26,0.8)">MCP SERVER</text>
-      <text x="844" y="220" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="13" font-weight="600" letter-spacing="0.1em" fill="rgba(242,238,234,0.6)">CLAUDE</text>
+      <text x="844" y="220" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="13" font-weight="600" letter-spacing="0.1em" fill="rgba(245, 245, 245,0.6)">CLAUDE</text>
 
       <!-- sub-labels -->
-      <text x="80"  y="244" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8.5" fill="rgba(242,238,234,0.25)" letter-spacing="0.06em">capture</text>
-      <text x="272" y="244" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8.5" fill="rgba(242,238,234,0.25)" letter-spacing="0.06em">interface</text>
+      <text x="80"  y="244" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8.5" fill="rgba(245, 245, 245,0.85)" letter-spacing="0.06em">capture</text>
+      <text x="272" y="244" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8.5" fill="rgba(245, 245, 245,0.85)" letter-spacing="0.06em">interface</text>
       <text x="460" y="260" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8.5" fill="rgba(38, 204, 26,0.5)" letter-spacing="0.06em">postgres + pgvector</text>
       <text x="652" y="244" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8.5" fill="rgba(38, 204, 26,0.4)" letter-spacing="0.06em">open protocol</text>
-      <text x="844" y="234" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8.5" fill="rgba(242,238,234,0.22)" letter-spacing="0.06em">any mcp client</text>
+      <text x="844" y="234" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8.5" fill="rgba(245, 245, 245,0.82)" letter-spacing="0.06em">any mcp client</text>
 
       <!-- stat strip -->
-      <line x1="40" y1="318" x2="960" y2="318" stroke="rgba(242,238,234,0.06)" stroke-width="1"/>
+      <line x1="40" y1="318" x2="960" y2="318" stroke="rgba(245, 245, 245,0.06)" stroke-width="1"/>
 
-      <text x="150" y="308" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="rgba(242,238,234,0.3)" letter-spacing="0.12em">LATENCY</text>
-      <text x="150" y="336" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="22" font-weight="700" fill="rgba(242,238,234,0.65)" letter-spacing="0.04em">&lt; 5 SEC</text>
+      <text x="150" y="308" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="rgba(245, 245, 245,0.3)" letter-spacing="0.12em">LATENCY</text>
+      <text x="150" y="336" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="22" font-weight="700" fill="rgba(245, 245, 245,0.65)" letter-spacing="0.04em">&lt; 5 SEC</text>
 
-      <line x1="280" y1="295" x2="280" y2="350" stroke="rgba(242,238,234,0.07)" stroke-width="1"/>
+      <line x1="280" y1="295" x2="280" y2="350" stroke="rgba(245, 245, 245,0.07)" stroke-width="1"/>
 
-      <text x="390" y="308" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="rgba(242,238,234,0.3)" letter-spacing="0.12em">MONTHLY COST</text>
+      <text x="390" y="308" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="rgba(245, 245, 245,0.3)" letter-spacing="0.12em">MONTHLY COST</text>
       <text x="390" y="336" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="22" font-weight="700" fill="var(--red)" letter-spacing="0.04em">$0.20</text>
 
-      <line x1="510" y1="295" x2="510" y2="350" stroke="rgba(242,238,234,0.07)" stroke-width="1"/>
+      <line x1="510" y1="295" x2="510" y2="350" stroke="rgba(245, 245, 245,0.07)" stroke-width="1"/>
 
-      <text x="610" y="308" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="rgba(242,238,234,0.3)" letter-spacing="0.12em">THOUGHTS</text>
-      <text x="610" y="336" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="22" font-weight="700" fill="rgba(242,238,234,0.65)" letter-spacing="0.04em">70+</text>
+      <text x="610" y="308" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="rgba(245, 245, 245,0.3)" letter-spacing="0.12em">THOUGHTS</text>
+      <text x="610" y="336" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="22" font-weight="700" fill="rgba(245, 245, 245,0.65)" letter-spacing="0.04em">70+</text>
 
-      <line x1="720" y1="295" x2="720" y2="350" stroke="rgba(242,238,234,0.07)" stroke-width="1"/>
+      <line x1="720" y1="295" x2="720" y2="350" stroke="rgba(245, 245, 245,0.07)" stroke-width="1"/>
 
-      <text x="840" y="308" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="rgba(242,238,234,0.3)" letter-spacing="0.12em">SETUP TIME</text>
-      <text x="840" y="336" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="22" font-weight="700" fill="rgba(242,238,234,0.65)" letter-spacing="0.04em">45 MIN</text>
+      <text x="840" y="308" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="rgba(245, 245, 245,0.3)" letter-spacing="0.12em">SETUP TIME</text>
+      <text x="840" y="336" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="22" font-weight="700" fill="rgba(245, 245, 245,0.65)" letter-spacing="0.04em">45 MIN</text>
     </svg>
   </div>
 </div>
@@ -775,7 +775,7 @@ footer {
         <div class="sk-stars"><div class="sk-star-row"><div class="sk-star on"></div><div class="sk-star on"></div><div class="sk-star"></div><div class="sk-star"></div><div class="sk-star"></div></div></div>
       </div>
       <div class="sk-row" style="border-bottom:1px solid rgba(38, 204, 26,0.2);">
-        <div class="sk-code" style="color:rgba(242,238,234,0.4);">Meta</div>
+        <div class="sk-code" style="color:rgba(245, 245, 245,0.4);">Meta</div>
         <div class="sk-title" style="color:var(--red);">The System Is Live Right Now</div>
         <div class="sk-desc">This page was built using the Open Brain MCP — search_thoughts and list_thoughts calls powered every piece of content. The portfolio is itself proof the system works.</div>
         <div></div>
@@ -791,7 +791,7 @@ footer {
     <!-- brain icon closing mark -->
     <svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
       <circle cx="24" cy="24" r="22" fill="none" stroke="var(--red)" stroke-width="2" stroke-dasharray="4,3"/>
-      <circle cx="24" cy="24" r="10" fill="none" stroke="rgba(242,238,234,0.3)" stroke-width="1.5"/>
+      <circle cx="24" cy="24" r="10" fill="none" stroke="rgba(245, 245, 245,0.3)" stroke-width="1.5"/>
       <circle cx="24" cy="24" r="3" fill="var(--red)"/>
     </svg>
   </div>
@@ -804,7 +804,7 @@ footer {
     <div class="stack">
       <span class="chip">Slack</span><span class="chip">Supabase</span><span class="chip">pgvector</span><span class="chip">MCP</span><span class="chip">Claude</span>
     </div>
-    <div style="font-size:9px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(242,238,234,0.2);">Open Brain · 2026</div>
+    <div style="font-size:9px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(245, 245, 245,0.8);">Open Brain · 2026</div>
   </footer>
 </div>
 
