@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>OPEN BRAIN — Lewis Stone</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Special+Elite&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+:root {
+  --black: #0c0c0c;
+  --white: #f2eeea;
+  --red:   #cc1a1a;
+  --red2:  #991212;
+  --dim:   rgba(242,238,234,0.45);
+  --faint: rgba(242,238,234,0.08);
+}
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: 'Space Mono', monospace;
+  overflow-x: hidden;
+}
+
+/* ── GRAIN OVERLAY ── */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 999; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay; opacity: 0.7;
+}
+
+/* ── HIDDEN SVG FILTERS ── */
+.filters { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+/* ── LAYOUT ── */
+.pg { max-width: 1100px; margin: 0 auto; padding: 0 56px; }
+@media (max-width: 680px) { .pg { padding: 0 24px; } }
+hr.slash {
+  border: none; height: 3px;
+  background: repeating-linear-gradient(90deg, var(--red) 0px, var(--red) 18px, transparent 18px, transparent 26px);
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; inset-inline: 0; z-index: 50;
+  background: rgba(12,12,12,0.96);
+  border-bottom: 3px solid var(--red);
+  backdrop-filter: blur(8px);
+}
+.nav-inner {
+  max-width: 1100px; margin: 0 auto; padding: 0 56px;
+  height: 52px; display: flex; align-items: center; justify-content: space-between;
+}
+@media (max-width: 680px) { .nav-inner { padding: 0 24px; } }
+.nav-name {
+  font-family: 'Oswald', sans-serif;
+  font-size: 18px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--white);
+}
+.nav-name span { color: var(--red); }
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a {
+  font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--dim); text-decoration: none; transition: color .15s;
+}
+.nav-links a:hover { color: var(--red); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 1fr 440px;
+  align-items: center; gap: 0;
+  padding-top: 52px;
+}
+@media (max-width: 900px) { .hero { grid-template-columns: 1fr; } .hero-art { display: none; } }
+
+.hero-copy { padding: 80px 0 80px; }
+
+.hero-kicker {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--red); padding: 5px 14px;
+  margin-bottom: 32px;
+}
+.kicker-txt {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--white);
+}
+
+h1.hero-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(4rem, 10vw, 9rem);
+  font-weight: 700; line-height: 0.9;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--white); margin-bottom: 0;
+  filter: url(#rough);
+}
+h1.hero-title .red { color: var(--red); display: block; }
+h1.hero-title .sub {
+  display: block; font-size: 0.18em; font-weight: 400;
+  letter-spacing: 0.16em; color: var(--dim);
+  margin-top: 20px; font-family: 'Space Mono', monospace;
+  text-transform: uppercase; filter: none;
+}
+
+.hero-body {
+  margin-top: 36px; max-width: 500px;
+  font-family: 'Special Elite', cursive;
+  font-size: 1rem; line-height: 1.75; color: var(--dim);
+}
+
+.hero-stats {
+  display: flex; gap: 0; margin-top: 48px;
+  border-top: 3px solid var(--white);
+  border-bottom: 1px solid rgba(242,238,234,0.15);
+}
+.stat {
+  flex: 1; padding: 20px 0;
+  border-right: 1px solid rgba(242,238,234,0.1);
+}
+.stat:last-child { border-right: none; }
+.stat-n {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2.4rem; font-weight: 700;
+  display: block; line-height: 1; letter-spacing: -0.01em; margin-bottom: 4px;
+}
+.stat-n.r { color: var(--red); }
+.stat-l { font-size: 8.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); }
+
+/* ── BRAIN GRENADE ART ── */
+.hero-art {
+  display: flex; align-items: center; justify-content: center;
+  height: 100vh; position: relative;
+  background: radial-gradient(ellipse at center, rgba(204,26,26,0.1) 0%, transparent 65%);
+}
+
+/* ── SECTION HEADERS ── */
+.sec {
+  padding: 88px 0;
+  border-top: 3px solid var(--white);
+}
+.sec-label {
+  display: inline-block;
+  font-size: 9px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--black); background: var(--red);
+  padding: 4px 10px; margin-bottom: 20px;
+}
+h2.sec-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(2.4rem, 5vw, 4.2rem); font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  line-height: 0.95; margin-bottom: 52px;
+  filter: url(#rough);
+}
+h2.sec-title em { color: var(--red); font-style: normal; }
+
+/* ── PROBLEM / SOLUTION ── */
+.ps { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
+@media (max-width: 640px) { .ps { grid-template-columns: 1fr; } }
+.ps-panel { padding: 36px 32px; }
+.ps-panel.bad  { background: rgba(204,26,26,0.06); border-left: 3px solid var(--red); }
+.ps-panel.good { background: rgba(242,238,234,0.04); border-left: 3px solid var(--white); }
+.ps-head {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+  margin-bottom: 24px; display: block;
+}
+.ps-head.bad { color: var(--red); }
+.ps-head.good { color: var(--white); }
+.ps-item { display: flex; gap: 12px; margin-bottom: 14px; font-size: 0.83rem; color: var(--dim); line-height: 1.6; font-family: 'Special Elite', cursive; }
+.ps-item b { color: var(--red); flex-shrink: 0; }
+
+/* ── ARCH DIAGRAM ── */
+.arch-bg { background: #111; border-top: 3px solid var(--white); border-bottom: 3px solid var(--white); }
+.arch-svg-wrap { overflow-x: auto; padding: 0; }
+.arch-svg { min-width: 700px; max-width: 1000px; width: 100%; display: block; margin: 0 auto; }
+
+/* ── STEPS ── */
+.steps { }
+.step { display: grid; grid-template-columns: 72px 1fr; padding: 32px 0; border-top: 1px solid rgba(242,238,234,0.1); }
+.step:last-child { border-bottom: 1px solid rgba(242,238,234,0.1); }
+.step-n {
+  font-family: 'Oswald', sans-serif; font-size: 2.8rem; font-weight: 700;
+  color: var(--red); line-height: 1; letter-spacing: 0.02em;
+  opacity: 0.5;
+}
+.step h4 {
+  font-family: 'Oswald', sans-serif; font-size: 1.3rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; color: var(--white);
+}
+.step p { font-size: 0.82rem; color: var(--dim); line-height: 1.75; max-width: 520px; font-family: 'Special Elite', cursive; }
+.step-code {
+  margin-top: 12px; padding: 14px 18px;
+  background: rgba(242,238,234,0.04); border-left: 3px solid var(--red);
+  font-size: 0.7rem; color: var(--dim); line-height: 1.85; max-width: 460px;
+}
+.step-code .r { color: var(--red); }
+
+/* ── THOUGHTS ── */
+.thought-block { border-top: 1px solid rgba(242,238,234,0.1); padding: 22px 0; display: grid; grid-template-columns: 88px 70px 1fr 140px; gap: 20px; align-items: start; }
+.thought-block:last-child { border-bottom: 1px solid rgba(242,238,234,0.1); }
+.thought-block:hover { background: rgba(242,238,234,0.02); }
+.t-badge { font-size: 8px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 8px; display: inline-block; }
+.t-badge.obs  { background: rgba(242,238,234,0.1); color: var(--white); }
+.t-badge.ref  { background: var(--red); color: var(--white); }
+.t-badge.idea { background: transparent; color: var(--red); border: 1px solid var(--red); }
+.t-date { font-size: 9px; color: var(--dim); letter-spacing: 0.1em; padding-top: 4px; }
+.t-body { font-size: 0.82rem; color: var(--dim); line-height: 1.7; font-family: 'Special Elite', cursive; }
+.t-topic { font-size: 8.5px; color: rgba(242,238,234,0.3); letter-spacing: 0.08em; line-height: 1.8; padding-top: 4px; }
+@media (max-width: 780px) { .thought-block { grid-template-columns: 1fr; gap: 6px; } }
+
+/* ── COST ── */
+.cost-split { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+@media (max-width: 720px) { .cost-split { grid-template-columns: 1fr; gap: 48px; } }
+.big-num {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(5rem, 16vw, 13rem); font-weight: 700;
+  line-height: 0.85; letter-spacing: 0.02em; color: var(--red);
+  filter: url(#rough);
+}
+.big-num small {
+  display: block; font-size: 0.1em; font-family: 'Space Mono', monospace;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--dim); margin-top: 14px;
+  filter: none;
+}
+.cost-list { }
+.cl-row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid rgba(242,238,234,0.08); font-size: 0.83rem; }
+.cl-row:first-child { border-top: 1px solid rgba(242,238,234,0.08); }
+.cl-k { color: var(--dim); font-family: 'Special Elite', cursive; }
+.cl-v { font-weight: 700; font-size: 0.78rem; }
+.cl-v.g { color: var(--white); }
+.cl-v.r { color: var(--red); }
+
+/* ── SKILLS ── */
+.sk-row { display: grid; grid-template-columns: 56px 200px 1fr 100px; gap: 24px; align-items: start; padding: 26px 0; border-top: 1px solid rgba(242,238,234,0.08); }
+.sk-row:last-child { border-bottom: 1px solid rgba(242,238,234,0.08); }
+.sk-row:hover { background: rgba(204,26,26,0.04); }
+.sk-code { font-size: 9px; font-weight: 700; letter-spacing: 0.14em; color: var(--red); text-transform: uppercase; padding-top: 3px; }
+.sk-title { font-family: 'Oswald', sans-serif; font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--white); padding-top: 2px; }
+.sk-desc { font-size: 0.8rem; color: var(--dim); line-height: 1.7; font-family: 'Special Elite', cursive; }
+.sk-stars { display: flex; gap: 4px; padding-top: 6px; flex-direction: column; align-items: flex-end; }
+.sk-star-row { display: flex; gap: 4px; }
+.sk-star { width: 8px; height: 8px; border-radius: 50%; background: rgba(242,238,234,0.12); }
+.sk-star.on { background: var(--red); }
+@media (max-width: 780px) { .sk-row { grid-template-columns: 1fr; } }
+
+/* ── CLOSING ── */
+.closing {
+  padding: 96px 0; text-align: center;
+  border-top: 3px solid var(--white);
+}
+.closing blockquote {
+  font-family: 'Oswald', sans-serif; font-size: clamp(1.4rem, 3vw, 2.2rem);
+  font-weight: 400; text-transform: uppercase; letter-spacing: 0.06em;
+  max-width: 720px; margin: 0 auto 48px; line-height: 1.35; color: var(--white);
+}
+.closing blockquote em { color: var(--red); font-style: normal; }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 3px solid var(--red);
+  padding: 28px 0;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 16px;
+}
+.f-name { font-family: 'Oswald', sans-serif; font-size: 1rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+.f-name span { color: var(--red); }
+.stack { display: flex; gap: 6px; flex-wrap: wrap; }
+.chip { font-size: 8px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 4px 10px; border: 1px solid rgba(242,238,234,0.15); color: var(--dim); }
+</style>
+</head>
+<body>
+
+<!-- DISTRESS FILTER -->
+<svg class="filters">
+  <defs>
+    <filter id="rough" x="-2%" y="-2%" width="104%" height="104%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="3" seed="2" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+</svg>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-name">Open <span>Brain</span></div>
+    <ul class="nav-links">
+      <li><a href="#problem">Problem</a></li>
+      <li><a href="#arch">Architecture</a></li>
+      <li><a href="#brain">Brain</a></li>
+      <li><a href="#skills">Skills</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<div class="pg">
+  <div class="hero">
+
+    <div class="hero-copy">
+      <div class="hero-kicker">
+        <span class="kicker-txt">Lewis Stone · Side Project · 2026</span>
+      </div>
+
+      <h1 class="hero-title">
+        Open<br/>
+        <span class="red">Brain.</span>
+        <span class="sub">Slack · Supabase · MCP · Claude</span>
+      </h1>
+
+      <p class="hero-body">
+        Every time you open a new chat, your AI starts from zero. Open Brain is a database-backed, MCP-connected memory system you own — type a thought in Slack, any AI retrieves it semantically in under five seconds. Forever.
+      </p>
+
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-n">70</span><span class="stat-l">Thoughts</span></div>
+        <div class="stat"><span class="stat-n r">&lt;5s</span><span class="stat-l">Latency</span></div>
+        <div class="stat"><span class="stat-n r">$0.20</span><span class="stat-l">Per month</span></div>
+        <div class="stat"><span class="stat-n">∞</span><span class="stat-l">AI clients</span></div>
+      </div>
+    </div>
+
+    <!-- BRAIN GRENADE ILLUSTRATION -->
+    <div class="hero-art">
+      <img src="hero.png" alt="Open Brain — red brain held by two hands with WiFi signal" style="width:100%;max-width:380px;display:block;margin:0 auto;filter:drop-shadow(0 0 18px rgba(204,26,26,0.45))"/>
+      <svg width="0" height="0" style="display:none" viewBox="0 0 380 520" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="gritty">
+            <feTurbulence type="fractalNoise" baseFrequency="0.065" numOctaves="3" seed="5"/>
+            <feDisplacementMap in="SourceGraphic" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+          </filter>
+          <clipPath id="brainClip">
+            <!-- brain outer shape for clipping grenade lines -->
+            <path d="M 190 52
+              C 230 42, 268 48, 282 72
+              C 300 62, 322 70, 326 92
+              C 348 98, 352 122, 338 138
+              C 348 158, 340 182, 322 192
+              C 322 212, 308 228, 290 232
+              C 278 252, 258 264, 236 264
+              C 224 278, 208 282, 190 280
+              C 172 282, 156 278, 144 264
+              C 122 264, 102 252, 90 232
+              C 72 228, 58 212, 58 192
+              C 40 182, 32 158, 42 138
+              C 28 122, 32 98, 54 92
+              C 58 70, 80 62, 98 72
+              C 112 48, 150 42, 190 52 Z"/>
+          </clipPath>
+        </defs>
+
+        <!-- ── FIST (white silhouette) ── -->
+        <!-- palm -->
+        <path d="M 130 340
+                 L 126 460 Q 126 490 140 492
+                 L 240 492 Q 254 490 254 460
+                 L 250 340 Z"
+              fill="#f2eeea"/>
+        <!-- thumb -->
+        <path d="M 130 360 Q 108 340 106 310 Q 104 288 118 282 Q 132 278 138 300 L 138 360 Z" fill="#f2eeea"/>
+        <!-- index finger -->
+        <path d="M 146 342 L 144 286 Q 144 272 156 270 Q 168 270 168 284 L 168 342 Z" fill="#f2eeea"/>
+        <!-- middle finger -->
+        <path d="M 172 342 L 170 276 Q 170 262 182 260 Q 194 260 194 274 L 194 342 Z" fill="#f2eeea"/>
+        <!-- ring finger -->
+        <path d="M 198 342 L 196 282 Q 196 268 208 268 Q 220 268 220 282 L 220 342 Z" fill="#f2eeea"/>
+        <!-- pinky -->
+        <path d="M 224 342 L 222 298 Q 222 284 233 282 Q 244 282 244 296 L 244 342 Z" fill="#f2eeea"/>
+
+        <!-- finger dividers (dark ink lines) -->
+        <line x1="168" y1="342" x2="170" y2="278" stroke="#0c0c0c" stroke-width="2.5"/>
+        <line x1="194" y1="342" x2="196" y2="268" stroke="#0c0c0c" stroke-width="2.5"/>
+        <line x1="220" y1="342" x2="222" y2="280" stroke="#0c0c0c" stroke-width="2.5"/>
+        <line x1="244" y1="342" x2="244" y2="296" stroke="#0c0c0c" stroke-width="2.5"/>
+        <!-- palm knuckle line -->
+        <path d="M 138 342 Q 190 330 250 342" fill="none" stroke="#0c0c0c" stroke-width="2.5"/>
+        <!-- outline -->
+        <path d="M 130 340 L 126 460 Q 126 492 140 494 L 240 494 Q 254 492 254 460 L 250 340 Z
+                 M 130 360 Q 108 340 106 310 Q 104 288 118 282 Q 132 278 138 300"
+              fill="none" stroke="#0c0c0c" stroke-width="2.5" stroke-linejoin="round"/>
+
+        <!-- ── DRIPS ── -->
+        <path d="M 152 480 Q 148 500 150 516 Q 152 524 156 520 Q 160 516 158 504 L 156 480 Z" fill="#cc1a1a"/>
+        <path d="M 175 484 Q 172 508 174 526 Q 176 534 180 530 Q 184 524 181 510 L 178 484 Z" fill="#cc1a1a"/>
+        <path d="M 200 486 Q 198 510 199 528 Q 201 534 205 530 Q 208 524 206 510 L 203 486 Z" fill="#cc1a1a"/>
+        <path d="M 225 482 Q 222 502 224 516 Q 226 522 230 518 Q 233 512 231 500 L 228 482 Z" fill="#cc1a1a"/>
+        <!-- drip drops -->
+        <ellipse cx="153" cy="518" rx="4" ry="5" fill="#cc1a1a"/>
+        <ellipse cx="178" cy="533" rx="4" ry="5.5" fill="#cc1a1a"/>
+        <ellipse cx="203" cy="531" rx="4" ry="5" fill="#cc1a1a"/>
+        <ellipse cx="228" cy="520" rx="4" ry="5" fill="#cc1a1a"/>
+
+        <!-- ── BRAIN (red, sitting on fist) ── -->
+        <!-- main brain fill -->
+        <path d="M 190 52
+                 C 230 42, 268 48, 282 72
+                 C 300 62, 322 70, 326 92
+                 C 348 98, 352 122, 338 138
+                 C 348 158, 340 182, 322 192
+                 C 322 212, 308 228, 290 232
+                 C 278 252, 258 264, 236 264
+                 C 224 278, 208 282, 190 280
+                 C 172 282, 156 278, 144 264
+                 C 122 264, 102 252, 90 232
+                 C 72 228, 58 212, 58 192
+                 C 40 182, 32 158, 42 138
+                 C 28 122, 32 98, 54 92
+                 C 58 70, 80 62, 98 72
+                 C 112 48, 150 42, 190 52 Z"
+              fill="#cc1a1a"/>
+
+        <!-- grenade grid lines (clipped to brain) -->
+        <g clip-path="url(#brainClip)" stroke="#0c0c0c" stroke-width="3.5" fill="none" opacity="0.75">
+          <!-- vertical lines -->
+          <line x1="110" y1="40" x2="110" y2="290"/>
+          <line x1="145" y1="40" x2="145" y2="290"/>
+          <line x1="190" y1="40" x2="190" y2="290"/>
+          <line x1="235" y1="40" x2="235" y2="290"/>
+          <line x1="270" y1="40" x2="270" y2="290"/>
+          <!-- horizontal lines -->
+          <line x1="30" y1="88"  x2="350" y2="88"/>
+          <line x1="30" y1="120" x2="350" y2="120"/>
+          <line x1="30" y1="152" x2="350" y2="152"/>
+          <line x1="30" y1="184" x2="350" y2="184"/>
+          <line x1="30" y1="216" x2="350" y2="216"/>
+          <line x1="30" y1="248" x2="350" y2="248"/>
+        </g>
+
+        <!-- brain surface bumps / gyri folds (white ink strokes for texture) -->
+        <g fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2" stroke-linecap="round">
+          <!-- left hemisphere folds -->
+          <path d="M 68 130 Q 80 120 95 130 Q 85 145 68 140"/>
+          <path d="M 50 160 Q 65 148 80 158 Q 72 172 52 168"/>
+          <path d="M 72 190 Q 88 178 102 188 Q 95 202 74 200"/>
+          <path d="M 65 108 Q 78 96 93 106 Q 86 120 65 116"/>
+          <!-- right hemisphere folds -->
+          <path d="M 285 130 Q 298 118 312 128 Q 305 143 285 140"/>
+          <path d="M 290 160 Q 304 148 320 158 Q 312 172 290 168"/>
+          <path d="M 282 190 Q 296 178 310 188 Q 302 202 280 200"/>
+          <path d="M 278 108 Q 292 96 306 106 Q 298 120 278 116"/>
+          <!-- center fold / longitudinal fissure -->
+          <path d="M 190 52 Q 192 100 190 165 Q 188 220 190 280" stroke-width="3.5" stroke="rgba(0,0,0,0.3)"/>
+          <!-- corpus callosum suggestion -->
+          <path d="M 152 155 Q 170 148 190 150 Q 210 148 228 155"/>
+          <path d="M 148 168 Q 168 160 190 162 Q 212 160 232 168"/>
+        </g>
+
+        <!-- brain outline / ink stroke -->
+        <path d="M 190 52
+                 C 230 42, 268 48, 282 72
+                 C 300 62, 322 70, 326 92
+                 C 348 98, 352 122, 338 138
+                 C 348 158, 340 182, 322 192
+                 C 322 212, 308 228, 290 232
+                 C 278 252, 258 264, 236 264
+                 C 224 278, 208 282, 190 280
+                 C 172 282, 156 278, 144 264
+                 C 122 264, 102 252, 90 232
+                 C 72 228, 58 212, 58 192
+                 C 40 182, 32 158, 42 138
+                 C 28 122, 32 98, 54 92
+                 C 58 70, 80 62, 98 72
+                 C 112 48, 150 42, 190 52 Z"
+              fill="none" stroke="#0c0c0c" stroke-width="4" stroke-linejoin="round"/>
+
+        <!-- ── PIN / GRENADE SAFETY PIN ── -->
+        <!-- lever/spoon -->
+        <rect x="316" y="88" width="28" height="10" rx="3" fill="#f2eeea" stroke="#0c0c0c" stroke-width="2"/>
+        <!-- pin body -->
+        <rect x="178" y="36" width="24" height="20" rx="4" fill="#f2eeea" stroke="#0c0c0c" stroke-width="2.5"/>
+        <!-- pin ring -->
+        <circle cx="190" cy="22" r="14" fill="none" stroke="#f2eeea" stroke-width="4"/>
+        <circle cx="190" cy="22" r="14" fill="none" stroke="#0c0c0c" stroke-width="2.5"/>
+        <!-- pull ring highlight -->
+        <circle cx="190" cy="22" r="6" fill="none" stroke="#f2eeea" stroke-width="2.5"/>
+
+        <!-- ── RED SPLATTER around fist/brain join ── -->
+        <path d="M 128 290 Q 118 278 122 268 Q 115 260 120 252" fill="none" stroke="#cc1a1a" stroke-width="3" stroke-linecap="round"/>
+        <path d="M 252 290 Q 262 278 258 268 Q 265 260 260 252" fill="none" stroke="#cc1a1a" stroke-width="3" stroke-linecap="round"/>
+        <!-- blood drip from brain base -->
+        <path d="M 160 275 Q 158 288 160 300" stroke="#cc1a1a" stroke-width="4" stroke-linecap="round" fill="none"/>
+        <path d="M 220 275 Q 222 290 220 302" stroke="#cc1a1a" stroke-width="4" stroke-linecap="round" fill="none"/>
+        <path d="M 190 280 Q 190 295 190 310" stroke="#cc1a1a" stroke-width="5" stroke-linecap="round" fill="none"/>
+
+      </svg>
+    </div>
+  </div>
+</div>
+
+<hr class="slash"/>
+
+<!-- ══ PROBLEM ══ -->
+<div class="pg" id="problem">
+  <div class="sec">
+    <div class="sec-label">01 — Problem</div>
+    <h2 class="sec-title">Your AI starts<br/><em>from zero.</em> Every time.</h2>
+    <div class="ps">
+      <div class="ps-panel bad">
+        <span class="ps-head bad">// The old way</span>
+        <div class="ps-item"><b>—</b><span>Notes in Notion, Obsidian, Apple Notes — built for humans, invisible to AI agents</span></div>
+        <div class="ps-item"><b>—</b><span>Claude, ChatGPT, Cursor each hold different context and never talk to each other</span></div>
+        <div class="ps-item"><b>—</b><span>Every new chat forces you to re-explain who you are and what you're working on</span></div>
+        <div class="ps-item"><b>—</b><span>Zapier + SaaS chains — fragile, expensive, completely vendor-locked</span></div>
+        <div class="ps-item"><b>—</b><span>Agents without memory context are agents that guess — increasingly dangerous</span></div>
+      </div>
+      <div class="ps-panel good">
+        <span class="ps-head good">// Open Brain</span>
+        <div class="ps-item"><b>—</b><span>One Postgres database you own — single source of truth, zero middlemen</span></div>
+        <div class="ps-item"><b>—</b><span>MCP server exposes the brain to any AI via open protocol — no lock-in, ever</span></div>
+        <div class="ps-item"><b>—</b><span>Type in Slack → embedded, classified, semantically searchable in under 5 seconds</span></div>
+        <div class="ps-item"><b>—</b><span>$0.10–$0.30/month total, on primitives nobody's monetizing</span></div>
+        <div class="ps-item"><b>—</b><span>Vector similarity finds related thoughts by concept, not just keywords</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="slash"/>
+
+<!-- ══ ARCHITECTURE ══ -->
+<div class="arch-bg" id="arch">
+  <div class="pg">
+    <div class="sec" style="border-top:none;">
+      <div class="sec-label">02 — Architecture</div>
+      <h2 class="sec-title">Four layers.<br/><em>Nothing wasted.</em></h2>
+    </div>
+  </div>
+  <div class="arch-svg-wrap">
+    <svg class="arch-svg" viewBox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg">
+
+      <!-- background scanlines -->
+      <pattern id="scan" width="1" height="4" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="0" x2="1000" y2="0" stroke="rgba(242,238,234,0.03)" stroke-width="1"/>
+      </pattern>
+      <rect width="1000" height="400" fill="url(#scan)"/>
+
+      <!-- red glow behind center node -->
+      <circle cx="500" cy="165" r="90" fill="rgba(204,26,26,0.08)"/>
+
+      <!-- spine -->
+      <line x1="80" y1="165" x2="920" y2="165" stroke="rgba(242,238,234,0.15)" stroke-width="2"/>
+
+      <!-- arrows -->
+      <polygon points="258,160 272,165 258,170" fill="rgba(204,26,26,0.5)"/>
+      <polygon points="446,160 460,165 446,170" fill="rgba(204,26,26,0.5)"/>
+      <polygon points="638,160 652,165 638,170" fill="rgba(204,26,26,0.5)"/>
+      <polygon points="828,160 842,165 828,170" fill="rgba(204,26,26,0.5)"/>
+
+      <!-- labels above -->
+      <text x="170" y="132" text-anchor="middle" font-family="'Special Elite',cursive" font-size="12" fill="rgba(242,238,234,0.35)" font-style="italic">type</text>
+      <text x="358" y="132" text-anchor="middle" font-family="'Special Elite',cursive" font-size="12" fill="rgba(204,26,26,0.5)" font-style="italic">webhook</text>
+      <text x="548" y="132" text-anchor="middle" font-family="'Special Elite',cursive" font-size="12" fill="rgba(204,26,26,0.5)" font-style="italic">embed + store</text>
+      <text x="740" y="132" text-anchor="middle" font-family="'Special Elite',cursive" font-size="12" fill="rgba(204,26,26,0.5)" font-style="italic">expose</text>
+
+      <!-- NODES — circles with red border on active -->
+      <!-- You -->
+      <circle cx="80"  cy="165" r="52" fill="#111" stroke="rgba(242,238,234,0.2)" stroke-width="2"/>
+      <!-- Slack -->
+      <circle cx="272" cy="165" r="52" fill="#111" stroke="rgba(242,238,234,0.15)" stroke-width="2"/>
+      <!-- Supabase — bigger, red accent -->
+      <circle cx="460" cy="165" r="64" fill="#111" stroke="var(--red)" stroke-width="2.5"/>
+      <!-- MCP -->
+      <circle cx="652" cy="165" r="52" fill="#111" stroke="rgba(204,26,26,0.4)" stroke-width="2"/>
+      <!-- Claude -->
+      <circle cx="844" cy="165" r="44" fill="#111" stroke="rgba(242,238,234,0.1)" stroke-width="2"/>
+
+      <!-- icons -->
+      <!-- You: person -->
+      <circle cx="80" cy="151" r="12" fill="none" stroke="rgba(242,238,234,0.4)" stroke-width="2"/>
+      <path d="M 54 178 Q 54 165 80 165 Q 106 165 106 178" fill="none" stroke="rgba(242,238,234,0.4)" stroke-width="2" stroke-linecap="round"/>
+
+      <!-- Slack: # -->
+      <text x="272" y="177" text-anchor="middle" font-size="38" fill="rgba(242,238,234,0.45)" font-family="sans-serif" font-weight="300">#</text>
+
+      <!-- Supabase: DB rings (red) -->
+      <ellipse cx="460" cy="152" rx="26" ry="9" fill="none" stroke="rgba(204,26,26,0.6)" stroke-width="2"/>
+      <line x1="434" y1="152" x2="434" y2="178" stroke="rgba(204,26,26,0.4)" stroke-width="2"/>
+      <line x1="486" y1="152" x2="486" y2="178" stroke="rgba(204,26,26,0.4)" stroke-width="2"/>
+      <ellipse cx="460" cy="178" rx="26" ry="9" fill="none" stroke="rgba(204,26,26,0.5)" stroke-width="2"/>
+
+      <!-- MCP: plug -->
+      <rect x="640" y="150" width="24" height="26" rx="4" fill="none" stroke="rgba(204,26,26,0.55)" stroke-width="2"/>
+      <line x1="644" y1="144" x2="644" y2="151" stroke="rgba(204,26,26,0.6)" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="656" y1="144" x2="656" y2="151" stroke="rgba(204,26,26,0.6)" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="652" y1="176" x2="652" y2="184" stroke="rgba(204,26,26,0.5)" stroke-width="2.5" stroke-linecap="round"/>
+
+      <!-- Claude: eye -->
+      <circle cx="844" cy="161" r="14" fill="none" stroke="rgba(242,238,234,0.3)" stroke-width="2"/>
+      <circle cx="844" cy="161" r="5"  fill="rgba(242,238,234,0.25)"/>
+
+      <!-- labels -->
+      <text x="80"  cy="218" y="228" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="13" font-weight="600" letter-spacing="0.1em" fill="rgba(242,238,234,0.7)" text-transform="uppercase">YOU</text>
+      <text x="272" y="228" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="13" font-weight="600" letter-spacing="0.1em" fill="rgba(242,238,234,0.7)">SLACK</text>
+      <text x="460" y="244" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="13" font-weight="600" letter-spacing="0.1em" fill="var(--red)">SUPABASE</text>
+      <text x="652" y="228" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="13" font-weight="600" letter-spacing="0.1em" fill="rgba(204,26,26,0.8)">MCP SERVER</text>
+      <text x="844" y="220" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="13" font-weight="600" letter-spacing="0.1em" fill="rgba(242,238,234,0.6)">CLAUDE</text>
+
+      <!-- sub-labels -->
+      <text x="80"  y="244" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8.5" fill="rgba(242,238,234,0.25)" letter-spacing="0.06em">capture</text>
+      <text x="272" y="244" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8.5" fill="rgba(242,238,234,0.25)" letter-spacing="0.06em">interface</text>
+      <text x="460" y="260" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8.5" fill="rgba(204,26,26,0.5)" letter-spacing="0.06em">postgres + pgvector</text>
+      <text x="652" y="244" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8.5" fill="rgba(204,26,26,0.4)" letter-spacing="0.06em">open protocol</text>
+      <text x="844" y="234" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8.5" fill="rgba(242,238,234,0.22)" letter-spacing="0.06em">any mcp client</text>
+
+      <!-- stat strip -->
+      <line x1="40" y1="318" x2="960" y2="318" stroke="rgba(242,238,234,0.06)" stroke-width="1"/>
+
+      <text x="150" y="308" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="rgba(242,238,234,0.3)" letter-spacing="0.12em">LATENCY</text>
+      <text x="150" y="336" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="22" font-weight="700" fill="rgba(242,238,234,0.65)" letter-spacing="0.04em">&lt; 5 SEC</text>
+
+      <line x1="280" y1="295" x2="280" y2="350" stroke="rgba(242,238,234,0.07)" stroke-width="1"/>
+
+      <text x="390" y="308" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="rgba(242,238,234,0.3)" letter-spacing="0.12em">MONTHLY COST</text>
+      <text x="390" y="336" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="22" font-weight="700" fill="var(--red)" letter-spacing="0.04em">$0.20</text>
+
+      <line x1="510" y1="295" x2="510" y2="350" stroke="rgba(242,238,234,0.07)" stroke-width="1"/>
+
+      <text x="610" y="308" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="rgba(242,238,234,0.3)" letter-spacing="0.12em">THOUGHTS</text>
+      <text x="610" y="336" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="22" font-weight="700" fill="rgba(242,238,234,0.65)" letter-spacing="0.04em">70+</text>
+
+      <line x1="720" y1="295" x2="720" y2="350" stroke="rgba(242,238,234,0.07)" stroke-width="1"/>
+
+      <text x="840" y="308" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="rgba(242,238,234,0.3)" letter-spacing="0.12em">SETUP TIME</text>
+      <text x="840" y="336" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="22" font-weight="700" fill="rgba(242,238,234,0.65)" letter-spacing="0.04em">45 MIN</text>
+    </svg>
+  </div>
+</div>
+
+<hr class="slash"/>
+
+<!-- ══ STEPS ══ -->
+<div class="pg">
+  <div class="sec">
+    <div class="sec-label">03 — Flow</div>
+    <h2 class="sec-title">End-to-end.<br/><em>Six steps.</em></h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">01</div>
+        <div>
+          <h4>Type a thought in Slack</h4>
+          <p>A bot listens on #brain-capture. One sentence — no app switching, no forms. Sentence starters guide clean, structured captures.</p>
+          <div class="step-code"><span class="r">💬</span> "I noticed — agents without persistent memory are forced to guess context on every session."</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">02</div>
+        <div><h4>Slack fires a webhook</h4><p>The bot fires an HTTP POST to the processing pipeline immediately. Raw text and metadata passed through.</p></div>
+      </div>
+      <div class="step">
+        <div class="step-n">03</div>
+        <div>
+          <h4>Auto-embed and classify</h4>
+          <p>Converted to a 1536-dimension vector. AI assigns type, topics, people — zero manual tagging.</p>
+          <div class="step-code"><span class="r">type:</span> "observation"<br/><span class="r">topics:</span> ["AI architecture"]<br/><span class="r">embedding:</span> [0.021, -0.043, 0.118 ...]</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">04</div>
+        <div><h4>Persist in Supabase</h4><p>Thought, metadata, and vector land in Postgres. pgvector enables cosine similarity search across everything you've ever captured.</p></div>
+      </div>
+      <div class="step">
+        <div class="step-n">05</div>
+        <div>
+          <h4>MCP server exposes as tools</h4>
+          <p>Three tools — capture_thought, search_thoughts, list_thoughts — available to any MCP AI client. No platform lock-in.</p>
+          <div class="step-code"><span class="r">search_thoughts</span>("AI memory")<br/>→ 54% · Mar 18 · MCP + Systems Thinking<br/>→ 51% · Mar 14 · Open Brain architecture</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">06</div>
+        <div><h4>Claude has context — forever</h4><p>Every session, Claude queries the brain. It knows your preferences, decisions, domain knowledge. Compounds with every capture.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="slash"/>
+
+<!-- ══ LIVE BRAIN ══ -->
+<div class="pg" id="brain">
+  <div class="sec">
+    <div class="sec-label">04 — Live Brain</div>
+    <h2 class="sec-title">Real thoughts.<br/><em>Real system.</em></h2>
+
+    <div class="thought-block">
+      <span class="t-badge ref">reference</span><span class="t-date">Mar 14</span>
+      <span class="t-body">Open Brain: one Postgres database, one MCP server, accessible to any AI via open protocol. Type in Slack → embedded, classified, searchable in under 5 seconds. Cost: $0.10–$0.30/month.</span>
+      <span class="t-topic">AI architecture · knowledge management</span>
+    </div>
+    <div class="thought-block">
+      <span class="t-badge obs">observation</span><span class="t-date">Mar 18</span>
+      <span class="t-body">MCP is a technical standard for connecting AI to external tools — similar to how Systems Thinking emphasizes holism. Both reject fragmented, siloed approaches. Protocols are the practical manifestation of systems philosophy.</span>
+      <span class="t-topic">MCP · Systems Thinking</span>
+    </div>
+    <div class="thought-block">
+      <span class="t-badge obs">observation</span><span class="t-date">Mar 27</span>
+      <span class="t-body">Open Brain demonstrates Context Architecture at its highest — organizing persistent knowledge across time, creating traversable data spaces. Textbook "Dewey Decimal system for yourself."</span>
+      <span class="t-topic">context architecture · portfolio</span>
+    </div>
+    <div class="thought-block">
+      <span class="t-badge obs">observation</span><span class="t-date">Mar 14</span>
+      <span class="t-body">Lewis Stone preference — Track State or Don't Respond. Read full thread before replying. Only suggest untried actions. Reference what's already known: "Since restarting didn't work, the next thing to check is..."</span>
+      <span class="t-topic">Agent Preferences · Conversational AI</span>
+    </div>
+    <div class="thought-block">
+      <span class="t-badge obs">observation</span><span class="t-date">Mar 30</span>
+      <span class="t-body">IT Support Agent Spec: Zendesk + Slack only. Escalate after 2 user rounds. Always search past tickets per response. CEO/COO/CFO/EAs — skip directly to Slack.</span>
+      <span class="t-topic">IT Support · Zendesk · Agent Spec</span>
+    </div>
+    <div class="thought-block">
+      <span class="t-badge idea">idea</span><span class="t-date">Mar 27</span>
+      <span class="t-body">The internet is splitting: human web (fonts, layouts) and agent web (APIs, structured data, open protocols). Your knowledge infrastructure needs to work on both layers. Memory architecture is a compounding advantage.</span>
+      <span class="t-topic">AI future · strategy</span>
+    </div>
+  </div>
+</div>
+
+<hr class="slash"/>
+
+<!-- ══ COST ══ -->
+<div class="pg">
+  <div class="sec">
+    <div class="sec-label">05 — Cost</div>
+    <h2 class="sec-title">Costs almost<br/><em>nothing.</em></h2>
+    <div class="cost-split">
+      <div class="big-num">$0.20<small>per month</small></div>
+      <div class="cost-list">
+        <div class="cl-row"><span class="cl-k">Monthly operating cost</span><span class="cl-v g">$0.10 – $0.30</span></div>
+        <div class="cl-row"><span class="cl-k">Setup time</span><span class="cl-v g">~45 minutes</span></div>
+        <div class="cl-row"><span class="cl-k">Coding required</span><span class="cl-v g">None</span></div>
+        <div class="cl-row"><span class="cl-k">Vendor lock-in</span><span class="cl-v g">Zero</span></div>
+        <div class="cl-row"><span class="cl-k">AI platforms supported</span><span class="cl-v g">Any MCP client</span></div>
+        <div class="cl-row"><span class="cl-k">Previous version (Notion + Zapier)</span><span class="cl-v r">$40+/mo</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="slash"/>
+
+<!-- ══ SKILLS ══ -->
+<div class="pg" id="skills">
+  <div class="sec">
+    <div class="sec-label">06 — Skills</div>
+    <h2 class="sec-title">What this<br/><em>project proves.</em></h2>
+    <div class="skills">
+      <div class="sk-row">
+        <div class="sk-code">S-06</div>
+        <div class="sk-title">Context Architecture</div>
+        <div class="sk-desc">Built a persistent knowledge system with type hierarchy, topic taxonomy, semantic embeddings, and person linking. The Dewey Decimal system for AI-accessible personal knowledge.</div>
+        <div class="sk-stars"><div class="sk-star-row"><div class="sk-star on"></div><div class="sk-star on"></div><div class="sk-star on"></div><div class="sk-star on"></div><div class="sk-star on"></div></div></div>
+      </div>
+      <div class="sk-row">
+        <div class="sk-code">S-01</div>
+        <div class="sk-title">Specification Precision</div>
+        <div class="sk-desc">Every captured thought is precision-engineered — specific error conditions, explicit constraints, actionable insights. The brain structure itself is a specification for AI behavior.</div>
+        <div class="sk-stars"><div class="sk-star-row"><div class="sk-star on"></div><div class="sk-star on"></div><div class="sk-star on"></div><div class="sk-star"></div><div class="sk-star"></div></div></div>
+      </div>
+      <div class="sk-row">
+        <div class="sk-code">S-02</div>
+        <div class="sk-title">Evaluation & Quality Judgment</div>
+        <div class="sk-desc">Captures quality signals and standards enforcement. Saves "actionable insight" vs "interesting idea" differently — semantic vs functional correctness distinction.</div>
+        <div class="sk-stars"><div class="sk-star-row"><div class="sk-star on"></div><div class="sk-star on"></div><div class="sk-star on"></div><div class="sk-star"></div><div class="sk-star"></div></div></div>
+      </div>
+      <div class="sk-row">
+        <div class="sk-code">S-05</div>
+        <div class="sk-title">Trust & Security Design</div>
+        <div class="sk-desc">Documented reversible vs catastrophic operations, defined human approval points in agentic workflows. Verifiability principles visible throughout the IT support agent spec.</div>
+        <div class="sk-stars"><div class="sk-star-row"><div class="sk-star on"></div><div class="sk-star on"></div><div class="sk-star on"></div><div class="sk-star"></div><div class="sk-star"></div></div></div>
+      </div>
+      <div class="sk-row">
+        <div class="sk-code">S-04</div>
+        <div class="sk-title">Failure Pattern Recognition</div>
+        <div class="sk-desc">Captured specific failures with root cause analysis — traced errors to exact cross-domain issues, built correction mechanisms, documented each mode precisely.</div>
+        <div class="sk-stars"><div class="sk-star-row"><div class="sk-star on"></div><div class="sk-star on"></div><div class="sk-star"></div><div class="sk-star"></div><div class="sk-star"></div></div></div>
+      </div>
+      <div class="sk-row" style="border-bottom:1px solid rgba(204,26,26,0.2);">
+        <div class="sk-code" style="color:rgba(242,238,234,0.4);">Meta</div>
+        <div class="sk-title" style="color:var(--red);">The System Is Live Right Now</div>
+        <div class="sk-desc">This page was built using the Open Brain MCP — search_thoughts and list_thoughts calls powered every piece of content. The portfolio is itself proof the system works.</div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CLOSING ══ -->
+<div class="pg">
+  <div class="closing">
+    <blockquote>"The internet is splitting into two worlds — one built for humans, one built for <em>agents.</em> Your knowledge infrastructure needs to live in both."</blockquote>
+    <!-- brain icon closing mark -->
+    <svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="24" cy="24" r="22" fill="none" stroke="var(--red)" stroke-width="2" stroke-dasharray="4,3"/>
+      <circle cx="24" cy="24" r="10" fill="none" stroke="rgba(242,238,234,0.3)" stroke-width="1.5"/>
+      <circle cx="24" cy="24" r="3" fill="var(--red)"/>
+    </svg>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<div class="pg">
+  <footer>
+    <div class="f-name">Lewis <span>Stone</span> · lewis.r.stone@gmail.com</div>
+    <div class="stack">
+      <span class="chip">Slack</span><span class="chip">Supabase</span><span class="chip">pgvector</span><span class="chip">MCP</span><span class="chip">Claude</span>
+    </div>
+    <div style="font-size:9px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(242,238,234,0.2);">Open Brain · 2026</div>
+  </footer>
+</div>
+
+</body>
+</html>
